@@ -9,7 +9,7 @@ function reducer(state, action) {
     case "setCount":
       return { ...state, count: action.payload };
     case "setStep":
-      return { ...state, count: action.payload };
+      return { ...state, step: action.payload };
     case "reset":
       return { count: 0, step: 1 };
     default:
