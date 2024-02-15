@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import DateCounter from "./DateCounter";
 import Header from "./Header";
-
 const initialState = {
   question: [],
   status: "loading",
@@ -34,6 +33,7 @@ function App() {
   return (
     <div className="app">
       <Header />
+      <DateCounter />
     </div>
   );
 }
