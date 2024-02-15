@@ -1,39 +1,39 @@
-import React, { useEffect, useReducer } from "react";
-import DateCounter from "./DateCounter";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
-const initialState = {
-  question: [],
-  status: "loading",
-};
-function reducer(state, action) {
-  switch (action.type) {
-    case "dataReceived":
-      return {
-        ...state,
-        question: action.payload,
-        status: "ready",
-      };
-    case "dataFailed":
-      return {
-        ...state,
-        status: "error",
-      };
-    default:
-      throw new Error("Unknown action ");
-  }
-}
+// !https://the-react-quiz-swart.vercel.app/ **DEMO
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  useEffect(function () {
-    fetch("http://localhost:5000/questions")
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: "dataReceived", payload: data }))
-      .catch((err) => dispatch({ type: "dataFailed" }));
-  }, []);
+  const [questions, setQuestions] = useState([]);
+  useEffect(() => {
+    const FeatchData = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/questions");
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.error("error in feaching data,", error);
+      }
+    };
+    FeatchData();
+  });
   return (
     <div className="app">
       <Header />
-      <DateCounter />
+      <div>
+        <h1>List of Questions</h1>
+        <ul>
+          {questions.map((question) => (
+            <li key={question.id}>
+              <h3>{question.question}</h3>
+              <p>Options:</p>
+              <ul>
+                {question.options.map((option, index) => (
+                  <li key={index}>{option}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
