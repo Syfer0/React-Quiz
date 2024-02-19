@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import Header from "./Header";
 // !https://the-react-quiz-swart.vercel.app/ **DEMO
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {},
+  },
+});
 function App() {
+  <QueryClientProvider client={queryClient}>
+
   const [questions, setQuestions] = useState([]);
   useEffect(() => {
     const FeatchData = async () => {
@@ -28,7 +38,7 @@ function App() {
               <ul>
                 {question.options.map((option, index) => (
                   <li key={index}>{option}</li>
-                ))}
+                  ))}
               </ul>
             </li>
           ))}
@@ -36,6 +46,7 @@ function App() {
       </div>
     </div>
   );
+          </QueryClientProvider>
 }
 
 export default App;
