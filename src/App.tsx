@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import Header from "./Header";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import UserList from "./UserList";
 // !https://the-react-quiz-swart.vercel.app/ **DEMO
 
 const queryClient = new QueryClient({
@@ -11,10 +11,13 @@ const queryClient = new QueryClient({
   },
 });
 function App() {
-  <QueryClientProvider client={queryClient}>
-    <ReactQueryDevtools initialIsOpen={false} />
-    <Header />
-  </QueryClientProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <Header />
+      <UserList />
+    </QueryClientProvider>
+  );
 }
 
 export default App;
