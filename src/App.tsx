@@ -1,7 +1,6 @@
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import Header from "./Header";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { useEffect, useReducer } from "react";
 import Main from "./Min";
